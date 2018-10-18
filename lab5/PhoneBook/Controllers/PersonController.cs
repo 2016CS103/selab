@@ -11,6 +11,7 @@ namespace PhoneBook.Controllers
     {
         private PhoneBookDbEntities db = new PhoneBookDbEntities();
         // GET: Person
+        [Authorize]
         public ActionResult Dashboard()
         {
             var person = db.People.ToList();
@@ -20,6 +21,7 @@ namespace PhoneBook.Controllers
         }
 
         // GET: Person/Details/5
+        [Authorize]
         public ActionResult PersonDetails()
         {
             var person = db.People.ToList();
@@ -33,6 +35,7 @@ namespace PhoneBook.Controllers
         }
 
         // POST: Person/Create
+        [Authorize]
         [HttpPost]
         public ActionResult Create(Person collection)
         {
@@ -56,7 +59,7 @@ namespace PhoneBook.Controllers
                 db.People.Add(p);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("PersonDetails");
             }
             catch
             {
